@@ -1,8 +1,9 @@
-#include <LiquidCrystal.h>
+#include <LiquidCrystal_I2C.h>
 #include "MIDIUSB.h"
 #include <Waveshare_LCD1602_RGB.h>
 
 Waveshare_LCD1602_RGB lcd(16,2);
+//LiquidCrystal_I2C lcd(0x27,16,2);
 
 void noteOn(byte channel, byte pitch, byte velocity) {
   midiEventPacket_t noteOn = {0x09, 0x90 | channel, pitch, velocity};
@@ -21,7 +22,7 @@ void controlChange(byte channel, byte control, byte value) {
 
  // 11 Ports / Keys on first row of ports Set # as 12
 int PrevsensorValue[37] = {LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW,LOW}; // 37 Keys
-const char NoteValue[5] = {'C','4','C','4','#'};//,"D4","D4#","E4","F4","F4#","G4","G4#","A4","A4#","B4","C5","C5#","D5","D5#","E5","F5","F5#","G5","G5#","A5","A5#","B5","C6","C6#","D6","D6#","E6","F6","F6#","G6","G6#","A6","A6#"}; // 37 Keys
+const char* NoteValue[37] = {"C4","D4","D4#","E4","F4","F4#","G4","G4#","A4","A4#","B4","C5","C5#","D5","D5#","E5","F5","F5#","G5","G5#","A5","A5#","B5","C6","C6#","D6","D6#","E6","F6","F6#","G6","G6#","A6","A6#"}; // 37 Keys
 int sensorValue[37];
 int NumberofKeys=37;
 
@@ -127,261 +128,16 @@ int p = 0;
   
     if(sensorValue[p] == HIGH && PrevsensorValue[p] != sensorValue[p])
     {
-      //lcd.setCursor(0,0);
-      ///uint8_t note = NoteValue[p];
-      //String note = "h";
-      //lcd.send_string("note");
-      //lcd.setCursor(0,1);
-      //lcd.send_string("50");
-
-      //Hammy's Attempt
-      //lcd.send_string(NoteValue[p]);
-      
-      //const char *pNoteValue = NoteValue;
-      //char *pArr;
-      //pArr = pNoteValue[p];
-      //lcd.pritnf("Note:", *(pArr));
-      
-      //lcd.clear();
-      //lcd.setCursor(0,0);
-      //lcd.send_string("Note "),
-      //lcd.write_char(NoteValue[p]),
-      //lcd.write_char(NoteValue[p+1]);
-      //delay(100);
-
-      //******************Case Statement Solution for Note Assignment to Keys *****************************
-      //      <3 Hammy
+     
       
       const int inputPin = 0;
       
-      if (const int inputPin = 2){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("C4");
-        }
-      }
-      if (const int inputPin = 3){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("C4#");
-        }
-      }
-      if (const int inputPin = 4){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("D4");
-        }
-      }
-      if (const int inputPin = 5){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("D4#");
-        }
-      }
-      if (const int inputPin = 6){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("E4");
-        }
-      }
-      if (const int inputPin = 7){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("E4#");
-        }
-      }
-      if (const int inputPin = 8){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("F4");
-        }
-      }
-      if (const int inputPin = 9){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("G4");
-        }
-      }
-      if (const int inputPin = 10){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("G4#");
-        }
-      }
-      if (const int inputPin = 11){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("A4");
-        }
-      }
-      if (const int inputPin = 12){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("A4#");
-        }
-      }
-      if (const int inputPin = 13){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("B4");
-        }
-      }
-      if (const int inputPin = 22){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("C5");
-        }
-      }
-      if (const int inputPin = 23){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("C5#");
-        }
-      }
-      if (const int inputPin = 24){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("D5");
-        }
-      }
-      if (const int inputPin = 25){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("D5#");
-        }
-      }
-      if (const int inputPin = 26){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("E5");
-        }
-      }
-      if (const int inputPin = 27){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("E5#");
-        }
-      }
-      if (const int inputPin = 28){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("F5");
-        }
-      }
-      if (const int inputPin = 29){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("G5");
-        }
-      }
-      if (const int inputPin = 30){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("G5#");
-        }
-      }
-      if (const int inputPin = 31){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("A5");
-        }
-      }
-      if (const int inputPin = 32){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("A5#");
-        }
-      }
-      if (const int inputPin = 33){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("B5");
-        }
-      }
-      if (const int inputPin = 34){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("C6");
-        }
-      }
-      if (const int inputPin = 35){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("C6#");
-        }
-      }
-      if (const int inputPin = 36){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("D6");
-        }
-      }
-      if (const int inputPin = 37){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("D6#");
-        }
-      }
-      if (const int inputPin = 38){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("E6");
-        }
-      }
-      if (const int inputPin = 39){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("E6#");
-        }
-      }
-      if (const int inputPin = 40){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("F6");
-        }
-      }
-      if (const int inputPin = 41){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("G6");
-        }
-      }
-      if (const int inputPin = 42){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("G6#");
-        }
-      }
-      if (const int inputPin = 43){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("A6");
-        }
-      }
-      if (const int inputPin = 44){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("A6#");
-        }
-      }
-      if (const int inputPin = 45){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("B6");
-        }
-      }
-      if (const int inputPin = 46){
-        int inValue = digitalRead(inputPin);
-        if (inValue == HIGH){
-          lcd.send_string("C6");
-        }
-      }
-
-
-      //lcd.print(NoteValue[p]);
-          //I give up but i will return!!!
       
       Serial.println("Sending note on");
+      lcd.setCursor(0,0);
+      lcd.send_string(NoteValue[p]);
+      lcd.setCursor(0,1);
+      lcd.send_string("Insert Velocity Here");
       noteOn(0, 48+p, 100);   // Channel 0, middle C, normal velocity
       MidiUSB.flush();
       PrevsensorValue[p] = HIGH;
